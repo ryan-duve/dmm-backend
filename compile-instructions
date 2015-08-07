@@ -1,0 +1,4 @@
+cpp file must be compiled to (shared) object for python to use it
+
+g++-4.9 -std=c++11 -c -fPIC convert-14bits-to-useful-info.cpp -o convert-14bits-to-useful-info.o
+g++-4.9 -shared -Wl,-soname,libconvert-14bits-to-useful-info.so -o libconvert-14bits-to-useful-info.so  convert-14bits-to-useful-info.o

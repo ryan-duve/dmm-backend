@@ -1,6 +1,6 @@
 #!/usr/bin/python
 from ctypes import cdll
-lib = cdll.LoadLibrary('./libfoo.so')
+lib = cdll.LoadLibrary('./libconvert-14bits-to-useful-info.so')
 
 class Foo(object):
 	def __init__(self):
