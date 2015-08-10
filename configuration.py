@@ -2,20 +2,20 @@
 #set up serial and mysql connections
 
 import serial
-#import mysql.connector
+import mysql.connector
 
 #get password
-#with open ("password", "r") as myfile:
-#    password=myfile.read().replace('\n', '')
+with open ("password", "r") as myfile:
+    password=myfile.read().replace('\n', '')
 
 #mysql config
 #http://dev.mysql.com/doc/connector-python/en/connector-python-connectargs.html
-#config={
-#        'user':'uva_remote',
-#        'password':password,
-#        'host':'hicontrol.tunl.daq',
-#        'database':'slowcontrols',
-#}
+config={
+        'user':'root',
+        'password':password,
+        'host':'128.143.100.54',
+        'database':'slowcontrols',
+}
 
 #start serial
 ser = serial.Serial('/dev/ttyS0',
@@ -29,5 +29,5 @@ ser = serial.Serial('/dev/ttyS0',
          dsrdtr=False)
 
 #start mysql
-#cnx = mysql.connector.connect(**config) 
-#cur = cnx.cursor() 
+cnx = mysql.connector.connect(**config) 
+cur = cnx.cursor() 

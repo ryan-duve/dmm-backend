@@ -2,8 +2,8 @@
 import sys
 import re
 import thread,time
-#from writeTemps import *
 from configuration import *
+from writeResistance import *
 
 #initialize converter
 from converter import *
@@ -20,7 +20,6 @@ try:
 		data+=ser.read(ser.inWaiting())
 
 		if(len(data)>0):#assuming we got something
-			#print "len(data)=",len(data)
 
 			if len(data)==8: #wait for second part of message
 				continue
@@ -29,6 +28,7 @@ try:
 				encoded_data=data.encode("hex")
 				c.convert(encoded_data.decode("hex"))
 				print "converted_data =",c.convertedvalue
+				writeResistance(c.convertedvalue,password,cur,cnx)
 	
 				#clear data_buffer
 				data=""
@@ -36,11 +36,12 @@ try:
 	
 			else: #something funky happened, clear the buffer
 				print "clearing buffer"
+				ser.flushInput()
 				data=""
 
 except KeyboardInterrupt:
 	print "\nStopping data acquistion"
 
 #kill mysql
-#cur.close()
-#cnx.close()
+cur.close()
+cnx.close()
