@@ -18,7 +18,7 @@ class DMMConverter{
           ((in[5] & 0x07) == 0x06) &&
           ((in[6] & 0x0f) == 0x08))
       {
-        val = "-1000"; //must be at least 4 char long for insert function
+        val = "-1";
       }
       else
       {
@@ -136,7 +136,9 @@ class DMMConverter{
     std::string insertComma( const std::string & val, int pos )
     {
       std::string val2 = val;
-      val2.insert(2+pos,1,'.');
+	std::cout << "val2="<<val2<<", pos="<<pos<<std::endl;
+      if(pos+2 <= val2.length())//don't try inserting period beyond val
+        val2.insert(2+pos,1,'.');
       //return val.left(2+pos) + "." + val.right(4-pos);
       return val2;
     }
