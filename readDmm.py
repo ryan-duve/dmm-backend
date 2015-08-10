@@ -5,7 +5,12 @@ import thread,time
 #from writeTemps import *
 from configuration import *
 
-print "Reading temperatures: press Ctrl+C to stop"
+#initialize converter
+from converter import *
+c = DMMConverter()
+
+
+print "Reading resistance: press Ctrl+C to stop"
 #http://ubuntuforums.org/showthread.php?t=1514035#post_9488318
 data=""
 try:
@@ -23,9 +28,9 @@ try:
 
 			if len(data)==14: #entire 14-bit message has arrived
 				encoded_data=data.encode("hex")
-				n=2
-				#print data, [encoded_data[i:i+n] for i in range(0,len(encoded_data),n)]
-				print data, ":",encoded_data
+				print "data =",data, ", encoded_data =",encoded_data
+				c.convert(encoded_data.decode("hex"))
+				print "converted_data =",c.convertedvalue
 	
 				#clear data_buffer
 				data=""

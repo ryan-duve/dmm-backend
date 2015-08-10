@@ -4,8 +4,8 @@
 
 class DMMConverter{
   public:
-    void convert(char *input){
-      printf("input=%s",input);
+    double convert(char *input){
+      //printf("input=%s",input);
       //************************************************************************
       const char *in = input;
       std::string val,special,unit;
@@ -18,7 +18,7 @@ class DMMConverter{
           ((in[5] & 0x07) == 0x06) &&
           ((in[6] & 0x0f) == 0x08))
       {
-        val = "  0L";
+        val = "-1.0"; //must be at least 4 char long for insert function
       }
       else
       {
@@ -55,7 +55,6 @@ class DMMConverter{
       }
 
       double d_val = stod(val);
-      std::cout << "d_val="<<d_val<<std::endl<<std::endl;
 
       // try to find some special modes
       //
@@ -102,18 +101,6 @@ class DMMConverter{
         unit    = "%";
         special = "PC";
       }
-      /* Can't find the reason for this any more
-         else if (in[13] & 0x04)
-         {
-         unit    = "C";
-         special = "TE";
-         } 
-         else if (in[13] & 0x02)
-         {
-         unit    = "F";
-         special = "TE";
-         }
-         */
       else if (in[13] & 0x01)
       {
         unit    = "C";
@@ -124,42 +111,11 @@ class DMMConverter{
         std::cerr << "Unknown unit!" << std::endl;
       }
 
-      // try to find prefix
-      //
-     // if (in[9] & 0x04)
-     // {
-     //   d_val /= 1e9;
-     //   unit.insert(0,1,'n');
-     // }
-     // else if (in[9] & 0x08)
-     // {
-     //   d_val /= 1e6;
-     //   unit.insert(0,1,'u');
-     // }
-     // else if (in[10] & 0x08)
-     // {
-     //   d_val /= 1e3;
-     //   unit.insert(0,1,'m');
-     // }
-     // else if (in[9] & 0x02)
-     // {
-     //   d_val *= 1e3;
-     //   unit.insert(0,1,'k');
-     // }
-     // else if (in[10] & 0x02)
-     // {
-     //   d_val *= 1e6;
-     //   unit.insert(0,1,'M');
-     // }
-
       //emit value( d_val, val, unit, special, true, re->id() );
-      std::cout << d_val << val << unit << special <<std::endl;
-      std::cout << "d_val" << d_val << std::endl;
-      std::cout << "val" << val << std::endl;
-      std::cout << "unit" << unit<< std::endl;
-      std::cout << "special" << special << std::endl;
+      std::cout << std::endl << "returning d_val = " << d_val << std::endl;
 
       //************************************************************************
+      return d_val;
     }
 
     const char *vc820Digit( int byte )
@@ -189,6 +145,10 @@ class DMMConverter{
 };
 
 extern "C" {
-  DMMConverter* DMMConverter_new(){ return new DMMConverter();}
-  void DMMConverter_convert(DMMConverter* dmm, char* input){dmm->convert(input);}
+	DMMConverter* DMMConverter_new(){ return new DMMConverter();}
+
+	double DMMConverter_convert(DMMConverter* dmm, char* input){
+		std::cout<<"dmm->convert(input)="<<dmm->convert(input);
+		return dmm->convert(input);
+	}
 }
