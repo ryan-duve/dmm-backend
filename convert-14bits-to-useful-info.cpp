@@ -18,7 +18,7 @@ class DMMConverter{
           ((in[5] & 0x07) == 0x06) &&
           ((in[6] & 0x0f) == 0x08))
       {
-        val = "-1.0"; //must be at least 4 char long for insert function
+        val = "-1000"; //must be at least 4 char long for insert function
       }
       else
       {
