@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import ctypes
 lib = ctypes.cdll.LoadLibrary('./libconvert-14bits-to-useful-info.so')
-lib.DMMConverter_convert.restype=ctypes.c_double
+lib.DMMConverter_convert.restype=ctypes.c_double #return as a double instead of default int
 
 class DMMConverter(object):
 	def __init__(self):

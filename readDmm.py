@@ -9,7 +9,6 @@ from configuration import *
 from converter import *
 c = DMMConverter()
 
-
 print "Reading resistance: press Ctrl+C to stop"
 #http://ubuntuforums.org/showthread.php?t=1514035#post_9488318
 data=""
@@ -21,14 +20,13 @@ try:
 		data+=ser.read(ser.inWaiting())
 
 		if(len(data)>0):#assuming we got something
-			print "len(data)=",len(data)
+			#print "len(data)=",len(data)
 
 			if len(data)==8: #wait for second part of message
 				continue
 
 			if len(data)==14: #entire 14-bit message has arrived
 				encoded_data=data.encode("hex")
-				print "data =",data, ", encoded_data =",encoded_data
 				c.convert(encoded_data.decode("hex"))
 				print "converted_data =",c.convertedvalue
 	

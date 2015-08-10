@@ -112,7 +112,7 @@ class DMMConverter{
       }
 
       //emit value( d_val, val, unit, special, true, re->id() );
-      std::cout << std::endl << "returning d_val = " << d_val << std::endl;
+      //std::cout << std::endl << "returning d_val = " << d_val << std::endl;
 
       //************************************************************************
       return d_val;
@@ -146,9 +146,5 @@ class DMMConverter{
 
 extern "C" {
 	DMMConverter* DMMConverter_new(){ return new DMMConverter();}
-
-	double DMMConverter_convert(DMMConverter* dmm, char* input){
-		std::cout<<"dmm->convert(input)="<<dmm->convert(input);
-		return dmm->convert(input);
-	}
+	double DMMConverter_convert(DMMConverter* dmm, char* input){return dmm->convert(input);}
 }
