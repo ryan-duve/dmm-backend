@@ -27,7 +27,7 @@ try:
 			if len(data)==14: #entire 14-bit message has arrived
 				encoded_data=data.encode("hex")
 				c.convert(encoded_data.decode("hex"))
-				print "converted_data =",c.convertedvalue
+				#print "converted_data =",c.convertedvalue
 				writeResistance(c.convertedvalue,password,cur,cnx)
 	
 				#clear data_buffer
