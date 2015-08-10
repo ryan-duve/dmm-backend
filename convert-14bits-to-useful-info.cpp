@@ -111,6 +111,34 @@ class DMMConverter{
         std::cerr << "Unknown unit!" << std::endl;
       }
 
+      // try to find prefix
+      //
+      if (in[9] & 0x04)
+      {
+	      d_val /= 1e9;
+	      //unit.prepend( "n" );
+      }
+      else if (in[9] & 0x08)
+      {
+	      d_val /= 1e6;
+	      //unit.prepend( "u" );
+      }
+      else if (in[10] & 0x08)
+      {
+	      d_val /= 1e3;
+	      //unit.prepend( "m" );
+      }
+      else if (in[9] & 0x02)
+      {
+	      d_val *= 1e3;
+	      //unit.prepend( "k" );
+      }
+      else if (in[10] & 0x02)
+      {
+	      d_val *= 1e6;
+	      //unit.prepend( "M" );
+      }
+
       //emit value( d_val, val, unit, special, true, re->id() );
       //std::cout << std::endl << "returning d_val = " << d_val << std::endl;
 
