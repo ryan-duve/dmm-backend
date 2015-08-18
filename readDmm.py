@@ -35,7 +35,7 @@ try:
 				ser.flushInput()
 	
 			else: #something funky happened, clear the buffer
-				print "clearing buffer"
+				#print "clearing buffer"
 				ser.flushInput()
 				data=""
 
